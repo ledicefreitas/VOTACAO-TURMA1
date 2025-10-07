@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Votação: Agência Campeã da Turma 1</title>
+    <style>
+        body {
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+            min-height: 100vh;
+            color: #1f2937;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .header {
+            text-align: center;
+            background: white;
+            border-radius: 20px;
+            padding: 3rem 2rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #1e40af;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            color: #4b5563;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .campaigns-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .campaign-card {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 3px solid transparent;
+        }
+
+        .campaign-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            border-color: #3b82f6;
+        }
+
+        .campaign-number {
+            display: inline-block;
+            background: linear-gradient(135deg, #1e40af, #3b82f6);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .image-upload-area {
+            border: 3px dashed #cbd5e1;
+            border-radius: 12px;
+            padding: 3rem 1rem;
+            text-align: center;
+            margin-bottom: 1.5rem;
+            background: #f8fafc;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .image-upload-area:hover {
+            border-color: #3b82f6;
+            background: #eff6ff;
+        }
+
+        .image-upload-area input[type="file"] {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        .upload-icon {
+            font-size: 3rem;
+            color: #94a3b8;
+            margin-bottom: 1rem;
+        }
+
+        .upload-text {
+            color: #64748b;
+            font-weight: 500;
+        }
+
+        .preview-image {
+            max-width: 100%;
+            max-height: 300px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .slogan-section {
+            background: #f1f5f9;
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-bottom: 1rem;
+        }
+
+        .slogan-label {
+            font-weight: 700;
+            color: #1e40af;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+        }
+
+        .slogan-text {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #1f2937;
+            font-style: italic;
+        }
+
+        .legenda-section {
+            background: #eff6ff;
+            padding: 1.5rem;
+            border-radius: 12px;
+            border-left: 4px solid #3b82f6;
+        }
+
+        .legenda-label {
+            font-weight: 700;
+            color: #1e40af;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+        }
+
+        .vote-section {
+            text-align: center;
+            background: white;
+            border-radius: 20px;
+            padding: 3rem 2rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .vote-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #1e40af, #3b82f6);
+            color: white;
+            padding: 1.2rem 3rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 25px rgba(59, 130, 246, 0.3);
+        }
+
+        .vote-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(59, 130, 246, 0.4);
+            background: linear-gradient(135deg, #1d4ed8, #2563eb);
+        }
+
+        .vote-text {
+            font-size: 1.3rem;
+            color: #1f2937;
+            margin-bottom: 2rem;
+            font-weight: 600;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .campaigns-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .campaign-card {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Votação: Agência Campeã da Turma 1 – Desafio de Campanha com IA</h1>
+            <p>Você está sendo convidado(a) a ajudar a eleger a Agência Campeã da Turma!</p>
+            <p>Os alunos criaram campanhas no Instagram para um e-commerce de produtos sustentáveis, seguindo um briefing real e usando ferramentas de Inteligência Artificial. Abaixo, veja as propostas criadas para o primeiro post da campanha — cada uma com a arte e o slogan criados pelos grupos. Escolha aquela que, na sua opinião, apresenta melhor criatividade, coerência com o briefing e potencial de engajamento.</p>
+        </div>
+
+        <div class="campaigns-grid">
+            <div class="campaign-card">
+                <div class="campaign-number">Campanha 1</div>
+                <div class="image-upload-area">
+                    <img src="VOTAÇÃO/GRUPO 1 - TURMA 1.jpg" alt="Campanha 1" class="preview-image">
+                </div>
+                <div class="slogan-section">
+                    <div class="slogan-label">Slogan:</div>
+                    <div class="slogan-text">"Consuma com consciência. Carregue com propósito."</div>
+                </div>
+                <div class="legenda-section">
+                    <div class="legenda-label">Legenda:</div>
+                    <div style="color: #64748b; font-style: italic;">Esta campanha não possui legenda.</div>
+                </div>
+            </div>
+
+            <div class="campaign-card">
+                <div class="campaign-number">Campanha 2</div>
+                <div class="image-upload-area" onclick="document.getElementById('image2').click()">
+                    <input type="file" id="image2" accept="image/*" onchange="previewImage(this, 'preview2')">
+                    <div id="upload-content2">
+                        <div class="upload-icon">📸</div>
+                        <div class="upload-text">Clique para adicionar imagem</div>
+                    </div>
+                    <img id="preview2" class="preview-image" style="display: none;">
+                </div>
+                <div class="slogan-section">
+                    <div class="slogan-label">Slogan:</div>
+                    <div class="slogan-text">"Estude com magia e cuide do planeta!"</div>
+                </div>
+                <div class="legenda-section">
+                    <div class="legenda-label">Legenda:</div>
+                    <div><strong>"Estude com magia e cuide do planeta!"</strong><br><br>
+                    Descubra a coleção sustentável e encantada que vai transformar sua rotina de estudos:<br><br>
+                    🪄 <strong>Caderno "Mapa do Maroto Eco"</strong> – papel 100% reciclado e resistente, para anotar todos os seus feitiços e ideias.<br>
+                    🪶 <strong>Lápis "Pena da Fênix"</strong> – feitos de madeira ecológica, deslizam com suavidade como magia pura.<br>
+                    ✨ <strong>Canetas Sustentáveis Encantadas</strong> – design mágico e sustentável, perfeitas para escrever e desenhar com estilo.<br><br>
+                    <strong>Por que escolher sustentável?</strong><br>
+                    🌱 Produtos que respeitam o planeta<br>
+                    💪 Duráveis, bonitos e conscientes<br>
+                    ✨ Estilo e magia em cada detalhe<br><br>
+                    Deixe seus estudos mais mágicos e conscientes!<br><br>
+                    📱 Peça agora pelo WhatsApp e receba rápido na sua cidade!<br><br>
+                    💡 <strong>Dica do bruxo:</strong> marque um amigo que precisa da magia da sustentabilidade nos estudos!</div>
+                </div>
+            </div>
+
+            <div class="campaign-card">
+                <div class="campaign-number">Campanha 3</div>
+                <div class="image-upload-area" onclick="document.getElementById('image3').click()">
+                    <input type="file" id="image3" accept="image/*" onchange="previewImage(this, 'preview3')">
+                    <div id="upload-content3">
+                        <div class="upload-icon">📸</div>
+                        <div class="upload-text">Clique para adicionar imagem</div>
+                    </div>
+                    <img id="preview3" class="preview-image" style="display: none;">
+                </div>
+                <div class="slogan-section">
+                    <div class="slogan-label">Slogan:</div>
+                    <div class="slogan-text">"Consumo Inteligente Começa Aqui"</div>
+                </div>
+                <div class="legenda-section">
+                    <div class="legenda-label">Legenda:</div>
+                    <div>Chega de adivinhar o que é sustentável.<br>
+                    Deixe a nossa IA fazer o trabalho pesado pra você.<br><br>
+                    🌿 Compre inteligente, viva sustentável, apoie o local.<br><br>
+                    👉 Visite [@ECOGENIUS | Link na bio] e comece hoje sua jornada de consumo consciente.</div>
+                </div>
+            </div>
+
+            <div class="campaign-card">
+                <div class="campaign-number">Campanha 4</div>
+                <div class="image-upload-area" onclick="document.getElementById('image4').click()">
+                    <input type="file" id="image4" accept="image/*" onchange="previewImage(this, 'preview4')">
+                    <div id="upload-content4">
+                        <div class="upload-icon">📸</div>
+                        <div class="upload-text">Clique para adicionar imagem</div>
+                    </div>
+                    <img id="preview4" class="preview-image" style="display: none;">
+                </div>
+                <div class="slogan-section">
+                    <div class="slogan-label">Slogan:</div>
+                    <div class="slogan-text">"Pequenas escolhas, grandes mudanças."</div>
+                </div>
+                <div class="legenda-section">
+                    <div class="legenda-label">Legenda:</div>
+                    <div style="color: #64748b; font-style: italic;">Esta campanha não possui legenda.</div>
+                </div>
+            </div>
+
+            <div class="campaign-card">
+                <div class="campaign-number">Campanha 5</div>
+                <div class="image-upload-area" onclick="document.getElementById('image5').click()">
+                    <input type="file" id="image5" accept="image/*" onchange="previewImage(this, 'preview5')">
+                    <div id="upload-content5">
+                        <div class="upload-icon">📸</div>
+                        <div class="upload-text">Clique para adicionar imagem</div>
+                    </div>
+                    <img id="preview5" class="preview-image" style="display: none;">
+                </div>
+                <div class="slogan-section">
+                    <div class="slogan-label">Slogan:</div>
+                    <div class="slogan-text">"Sorria para o planeta."</div>
+                </div>
+                <div class="legenda-section">
+                    <div class="legenda-label">Legenda:</div>
+                    <div>🌍 <strong>Dê um sorriso para o planeta!</strong><br><br>
+                    Você sabia que uma escova plástica pode levar mais de 400 anos para se decompor?<br><br>
+                    Nossa Escova de Dentes de Bambu é 100% biodegradável, com design moderno e feita para quem se importa com o futuro.<br><br>
+                    🌱 Vegana<br>
+                    🦷 Cerdas macias<br>
+                    ♻️ Embalagem reciclável<br><br>
+                    💬 Peça agora pelo WhatsApp e comece sua rotina mais ecológica hoje!<br><br>
+                    #SorriaParaOPlaneta #EscovaDeBambu #Sustentabilidade #ConsumoConsciente #EcoFriendly</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="vote-section">
+            <div class="vote-text">Analisou todas as campanhas? Agora é hora de votar!</div>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSdXgyas6yigr5uIBWAujBcthN5yIKRMoz6kGmV6y_1Uz3yweQ/viewform?usp=header" 
+               target="_blank" 
+               rel="noopener noreferrer" 
+               class="vote-button">
+               🗳️ Vote Aqui
+            </a>
+        </div>
+    </div>
+
+    <script>
+        function previewImage(input, previewId) {
+            const file = input.files[0];
+            const preview = document.getElementById(previewId);
+            const uploadContent = document.getElementById('upload-content' + previewId.slice(-1));
+            
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    preview.src = e.target.result;
+                    preview.style.display = 'block';
+                    uploadContent.style.display = 'none';
+                }
+                reader.readAsDataURL(file);
+            }
+        }
+
+        // Add hover effects to campaign cards
+        document.querySelectorAll('.campaign-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-5px)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+            });
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'98ad52e17480f1ff',t:'MTc1OTgzOTMyNC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
